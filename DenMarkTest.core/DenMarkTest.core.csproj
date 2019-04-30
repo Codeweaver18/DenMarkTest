@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Abstract\" />
     <Folder Include="Responses\" />
     <Folder Include="Request\" />
     <Folder Include="Proxy\" />
