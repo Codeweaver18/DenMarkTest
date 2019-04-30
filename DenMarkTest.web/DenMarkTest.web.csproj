@@ -17,4 +17,8 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DenMarkTest.DataAccessLayer\DenMarkTest.DataAccessLayer.csproj" />
+  </ItemGroup>
+
 </Project>

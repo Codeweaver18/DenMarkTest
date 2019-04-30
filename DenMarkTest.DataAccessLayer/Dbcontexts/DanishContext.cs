@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DenMarkTest.DataAccessLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,10 +12,11 @@ namespace DenMarkTest.DataAccessLayer.Dbcontexts
         public DanishContext(DbContextOptions<DanishContext> options)
                   : base(options)
         {
-            Database.Migrate();
-
+            //Database.EnsureCreated();
         }
-        public DbSet<string> companyProfile { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<TestParticipants> TestParticipants { get; set; }
 
     }
 }
