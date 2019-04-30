@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DenMarkTest.DataAccessLayer.Dbcontexts;
+using DenMarkTest.DataAccessLayer.Interfaces;
+using DenMarkTest.DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,7 @@ namespace DenMarkTest.web
             services.AddDbContext<DanishContext>(options =>
              options.UseSqlServer(cxn));
 
+            services.AddTransient<ITestsRepository, TestsRepository>();
              services.AddMvc();
         }
 
