@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DenMarkTest.core\DenMarkTest.core.csproj" />
     <ProjectReference Include="..\DenMarkTest.DataAccessLayer\DenMarkTest.DataAccessLayer.csproj" />
   </ItemGroup>
 

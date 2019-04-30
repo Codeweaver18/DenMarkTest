@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DenMarkTest.core.Abstract;
+using DenMarkTest.core.Services;
 using DenMarkTest.DataAccessLayer.Dbcontexts;
 using DenMarkTest.DataAccessLayer.Interfaces;
 using DenMarkTest.DataAccessLayer.Repositories;
@@ -31,7 +33,8 @@ namespace DenMarkTest.web
              options.UseSqlServer(cxn));
 
             services.AddTransient<ITestsRepository, TestsRepository>();
-             services.AddMvc();
+            services.AddTransient<ITestService, TestService>();//inject services in DI container
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
