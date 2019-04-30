@@ -17,6 +17,8 @@ namespace DenMarkTest.DataAccessLayer.Dbcontexts
         public DbSet<User> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestParticipants> TestParticipants { get; set; }
+        public DbSet<TestTypes> TestTypes { get; set; }
+
 
     }
 }

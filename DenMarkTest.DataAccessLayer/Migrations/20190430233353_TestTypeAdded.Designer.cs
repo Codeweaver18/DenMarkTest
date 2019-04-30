@@ -4,14 +4,16 @@ using DenMarkTest.DataAccessLayer.Dbcontexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DenMarkTest.DataAccessLayer.Migrations
 {
     [DbContext(typeof(DanishContext))]
-    partial class DanishContextModelSnapshot : ModelSnapshot
+    [Migration("20190430233353_TestTypeAdded")]
+    partial class TestTypeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
