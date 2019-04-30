@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  denmarktest.web:
+    image: denmarktest.web
+    build:
+      context: .
+      dockerfile: DenMarkTest.web\Dockerfile
