@@ -12,7 +12,7 @@ namespace DenMarkTest.DataAccessLayer.Dbcontexts
         public DanishContext(DbContextOptions<DanishContext> options)
                   : base(options)
         {
-            //Database.EnsureCreated();
+            Database.Migrate();
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
