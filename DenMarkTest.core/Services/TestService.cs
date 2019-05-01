@@ -72,6 +72,49 @@ namespace DenMarkTest.core.Services
 
             return res;
         }
+
+
+        /// <summary>
+        /// Fetches Recorded Test that guid matches the supplied guid
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public async Task<Test> getTestByGuid(string guid)
+        {
+            var res = new Test();
+            try
+            {
+                res = await _repo.getTestByGuid(guid);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Fetches from repo all tests and participants records
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<TestParticipants>> getTestParticipants()
+        {
+            var res = new List<TestParticipants>();
+            try
+            {
+                res = await _repo.getTestParticipants();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+
         /// <summary>
         /// Fetches all the Type of test recorded in the database                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         /// </summary>
@@ -92,5 +135,6 @@ namespace DenMarkTest.core.Services
 
             return res;
         }                    
+
     }
 }

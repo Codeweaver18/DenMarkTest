@@ -12,7 +12,7 @@
 
     <div class="col-md-6">
         <input type="button" value="Creat New Test" name="btnNewTest" class="btn btn-block"/>
-        <table>
+        <table class="table table-striped">
 
             <tr>
                 <th>Date</th>
@@ -22,16 +22,19 @@
 
             @{
                 var Test = await _service.getAllTest();
-                var result = Test.OrderByDescending(x => x.testDate).ToList();
-                foreach (var item in result)
+
+                foreach (var item in Test)
                 {
                     if (item != null)
                     {
 
+                        var count = item.TestParticipants.Count();
                 <tr>
                     <td>@item.testDate</td>
-                    <td>@item.TestParticipants.Count()</td>
-                    <td>@item.testType</td>
+                    <td>@count</td>
+                    <td>
+                   <a asp-action="TestDetails" asp-route-guid="@item.guid"> @item.testType</a>
+                    </td>
                 </tr>
             }
                 }

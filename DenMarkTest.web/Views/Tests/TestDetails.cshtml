@@ -1,0 +1,71 @@
+﻿@using DenMarkTest.web.ViewModel
+@using DenMarkTest.core.Abstract
+@using DenMarkTest.DataAccessLayer.Entities
+@using DenMarkTest.common.Utilities
+@inject ITestService  _service
+@inject TestUtilityClass  _utility
+@{
+    ViewData["Title"] = "TestDetails";
+    var TestDetailsGuid = ViewData["TestDetailsGuid"].ToString();
+}
+
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+
+
+    <div class="col-md-8">
+
+        @{
+        var details = await _service.getTestByGuid(TestDetailsGuid);
+
+        if (details != null)
+        {
+            <h2>@details.testType D.@details.testDate</h2>
+    }
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>Ranking</th>
+            <th>Result (meter)</th>
+            <th>Fitness Rating</th>
+
+        </tr>
+
+        @{
+        foreach (var item in details.TestParticipants)
+        {
+            <tr>
+                <td>
+                    <a asp-action="AtheleteDetails" asp-route-id="@item.Participant.id"> @item.Participant.fname @item.Participant.lname</a>
+
+                </td>
+                <td>@item.Result</td>
+                <td>@_utility.getRating(item.Result)</td>
+            </tr>
+    }
+        }
+
+    </table>
+    <a asp-action="AddAthelete" asp-route-guid="@details.guid">
+        <input type="button" value="Add New Athlete to test" class="btn btn-block"/>
+    </a><br/>
+    <a asp-action="DeleteTest" asp-route-guid="@details.guid">
+
+        <input type="button" value="Delete Test" class="btn btn-block"/>
+
+    </a>
+
+        }
+
+    </div>
+
+
+    <div class="col-md-2">
+
+    </div>
+
+</div>
+

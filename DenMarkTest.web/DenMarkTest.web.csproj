@@ -9,6 +9,7 @@
     <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.0" />
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DenMarkTest.common\DenMarkTest.common.csproj" />
     <ProjectReference Include="..\DenMarkTest.core\DenMarkTest.core.csproj" />
     <ProjectReference Include="..\DenMarkTest.DataAccessLayer\DenMarkTest.DataAccessLayer.csproj" />
   </ItemGroup>

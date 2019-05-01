@@ -7,10 +7,10 @@ namespace DenMarkTest.DataAccessLayer.Entities
 {
     public class TestParticipants:BaseEntity
     {
-       [ForeignKey("TestId")]
-        public Test Test { get; set; }
+        [ForeignKey("TestId")]
+        public virtual Test Test { get; set; }
         [ForeignKey("ParticipantId")]
-        public User Participant { get; set; }
+        public virtual User Participant { get; set; }
         public string Result { get; set; }
 
     }

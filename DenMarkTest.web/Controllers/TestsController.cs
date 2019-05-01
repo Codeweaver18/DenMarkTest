@@ -49,7 +49,7 @@ namespace DenMarkTest.web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    _service.createTest()
+                    //_service.createTest();
                 }
             }
             catch (Exception ex)
@@ -82,6 +82,126 @@ namespace DenMarkTest.web.Controllers
 
             return View();
         }
+
+
+        /// <summary>
+        /// Get detail view of a particular test that guid matches the supplied guid
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> TestDetails(string guid = null)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(guid))
+                {
+                    ViewData["TestDetailsGuid"] = guid.ToString();//setting the retrieved guid to be called from razor page by calling the injected service with @inject
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
+
+        /// <summary>
+        /// fetches detailed information about a specific athelete where the id matches the supplied id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> AtheleteDetails(int id=0)
+        {
+            try
+            {
+                if (id!=0)
+                {
+                    ViewData["AtheleteDetails"] = id.ToString();//setting the retrieved guid to be called from razor page by calling the injected service with @inject
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
+
+        /// <summary>
+        /// Delete the Specified Test which guid matches the supplied guid
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> DeleteTest(string guid = null)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(guid))
+                {
+                    ViewData["DeleteTestGuid"] = guid.ToString();//setting the retrieved guid to be called from razor page by calling the injected service with @inject
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddAtheleteToTest(string guid=null)
+        {
+            try
+            {
+                ViewData["AddAtheleteToTesttGuid"] = guid;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddAtheleteToTest(int )
+        {
+            try
+            {
+                ///No logic
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
 
     }
 }

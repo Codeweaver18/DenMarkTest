@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DenMarkTest.common.Utilities;
 using DenMarkTest.core.Abstract;
 using DenMarkTest.core.Services;
 using DenMarkTest.DataAccessLayer.Dbcontexts;
@@ -31,9 +32,12 @@ namespace DenMarkTest.web
             var cxn = Configuration["DbconnectionString"].ToString();//configuration string
 
             services.AddDbContext<DanishContext>(options =>
-             options.UseSqlServer(cxn));
+             options.UseSqlServer(cxn)
+             .UseLazyLoadingProxies());
+             
             services.AddTransient<ITestsRepository, TestsRepository>();
             services.AddTransient<ITestService, TestService>();//inject services in DI container
+            services.AddScoped<TestUtilityClass>();
             services.AddMvc();
             services.AddAutoMapper();
 

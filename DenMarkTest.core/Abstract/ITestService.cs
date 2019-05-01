@@ -12,6 +12,8 @@ namespace DenMarkTest.core.Abstract
         Task<List<Test>> getAllTest();
         Task<Test> createTest(string testType, DateTime testDate, string description);
         Task<List<TestTypes>> getTestTypes();
+        Task<List<TestParticipants>> getTestParticipants();
+        Task<Test> getTestByGuid(string guid);
 
     }
 }

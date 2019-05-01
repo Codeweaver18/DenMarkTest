@@ -20,6 +20,11 @@ namespace DenMarkTest.DataAccessLayer.Repositories
             _dbContext = dbContext;
         }
 
+        public Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Create/Persist New Test to the database {Test Table}
         /// </summary>
@@ -44,6 +49,40 @@ namespace DenMarkTest.DataAccessLayer.Repositories
             }
 
             return entity;
+        }
+
+
+        /// <summary>
+        /// Delete test that Guid Matches the supplied guid as Param
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public async Task<bool> deleteTestByGuid(string guid)
+        {
+            var isDelete = false;
+            var test = new Test();
+            try
+            {
+                test = (from x in _dbContext.Tests where x.guid == guid select x).FirstOrDefault();
+                if (test!=null)
+                {
+                    _dbContext.Tests.Remove(test);
+                    var result = await _dbContext.SaveChangesAsync();
+
+                    if (result>0)
+                    {
+                        isDelete = true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return isDelete;
         }
 
         /// <summary>
@@ -76,6 +115,59 @@ namespace DenMarkTest.DataAccessLayer.Repositories
         }
 
 
+
+        /// <summary>
+        /// Get a single Test Details that guid matches the supplied guid in Params supplied
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public async Task<Test> getTestByGuid(string guid)
+        {
+            var res = new Test();
+
+            try
+            {
+                res = (from x in _dbContext.Tests where x.guid == guid select x).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return res;
+        }
+
+        public Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        /// <summary>
+        /// fetches al the test carried out and it participants
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<TestParticipants>> getTestParticipants()
+        {
+            var res = new List<TestParticipants>();
+            try
+            {
+                res = (from c in _dbContext.TestParticipants select c).OrderByDescending(x => x.Test.testDate).ToList();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return res;
+        }
+
+
         /// <summary>
         /// Get all the types of test recorded on the database
         /// </summary>
@@ -96,6 +188,11 @@ namespace DenMarkTest.DataAccessLayer.Repositories
 
             return testTypeList;
 
+        }
+
+        public Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance)
+        {
+            throw new NotImplementedException();
         }
     }
 }
