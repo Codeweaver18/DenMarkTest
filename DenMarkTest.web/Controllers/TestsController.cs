@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DenMarkTest.core.Abstract;
+using DenMarkTest.web.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,7 +30,7 @@ namespace DenMarkTest.web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateTest()
+        public async Task<IActionResult> CreateTest(CreateTestViewModel model)
         {
             try
             {
@@ -38,16 +39,30 @@ namespace DenMarkTest.web.Controllers
             catch (Exception ex)
             {
 
-                throw ex;
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
             }
 
             return View();
         }
 
-
+        /// <summary>
+        /// View List of all the tests on the database with it corresponding number of participants order by dates
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult List()
+        public IActionResult ViewList()
         {
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+
+            }
+
 
             return View();
         }

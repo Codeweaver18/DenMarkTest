@@ -1,0 +1,41 @@
+﻿@using DenMarkTest.web.ViewModel;
+@using DenMarkTest.DataAccessLayer.Entities
+@using DenMarkTest.core.Abstract;
+@inject ITestService _service;
+
+<br/><br/>
+<div class="row">
+
+    <div class="col-md-3">
+
+    </div>
+
+
+    <div class="col-md-6">
+        <input type="button" value="Creat New Test" name="btnNewTest" class="btn btn-block"/>
+        <table>
+
+            <tr>
+                <th>Date</th>
+                <th>Number of Participants</th>
+                <th>Test type</th>
+            </tr>
+
+            @{ 
+                var Test= _service.
+                foreach (var item in collection)
+                {
+
+                }
+            }
+        </table>
+    </div>
+
+
+
+    <div class="col-md-3">
+
+    </div>
+
+</div>
+

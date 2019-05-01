@@ -9,9 +9,9 @@ namespace DenMarkTest.core.Abstract
 {
   public  interface ITestService
     {
-        Task<response> getAllTest();
-        Task<response> createTest(string testType, DateTime testDate, string description);
-        Task<response> getTestTypes();
+        Task<List<Test>> getAllTest();
+        Task<Test> createTest(string testType, DateTime testDate, string description);
+        Task<List<TestTypes>> getTestTypes();
 
     }
 }

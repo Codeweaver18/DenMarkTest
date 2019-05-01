@@ -26,30 +26,22 @@ namespace DenMarkTest.core.Services
         /// <param name="testType"></param>
         /// <param name="testDate"></param>
         /// <returns></returns>
-        public async Task<response> createTest(string testType, DateTime testDate, string description)
+        public async Task<Test> createTest(string testType, DateTime testDate, string description)
         {
             var entity = new Test();
-            var res = new response();
             try
             {
-                if (string.IsNullOrEmpty(testType) || string.IsNullOrEmpty(testDate.ToString()))
+                if (!string.IsNullOrEmpty(testType) && !string.IsNullOrEmpty(testDate.ToString()))
                 {
-                    res.responseMessage = "Please all parameters are required";
-                    
+                    entity.testDate = testDate;
+                    entity.testDescription = description;
+                    entity.testType = testType;
+
                 }
 
-                entity.testDate = testDate;
-                entity.testDescription = description;
-                entity.testType = testType;
-
+              
                var result= await _repo.createTest(entity);
-                if (result.id>0)
-                {
-                    res.responseObject = result;
-                    res.responseDescription = ResponseMessages.success;
-                    res.responseCode = ResponseCodes.success;
-                    res.responseMessage = ResponseMessages.success;
-                }  
+               
             }
             catch (Exception ex)
             {
@@ -57,26 +49,20 @@ namespace DenMarkTest.core.Services
                 throw ex;
             }
 
-            return res;
+            return entity;
         }
 
         /// <summary>
         /// Fetches all the Test created on the database
         /// </summary>
         /// <returns></returns>
-        public async Task<response> getAllTest()
+        public async Task<List<Test>> getAllTest()
         {
-            var res = new response();
+            var res = new List<Test>();
             try
             {
-                var result =await  _repo.getTest();
-                if (result!=null)
-                {
-                    res.responseObject = result;
-                    res.responseDescription = ResponseMessages.success;
-                    res.responseCode = ResponseCodes.success;
-                    res.responseMessage = ResponseMessages.success;
-                }
+                res =await  _repo.getTest();
+               
             }
             catch (Exception ex)
             {
@@ -90,19 +76,13 @@ namespace DenMarkTest.core.Services
         /// Fetches all the Type of test recorded in the database                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         /// </summary>
         /// <returns></returns>
-        public async Task<response> getTestTypes()
+        public async Task<List<TestTypes>> getTestTypes()
         {
-            var res = new response();
+            var res = new List<TestTypes>();
             try
             {
-                var result = await _repo.getTestTypes();
-                if (result!=null)
-                {
-                    res.responseObject = result;
-                    res.responseDescription = ResponseMessages.success;
-                    res.responseCode = ResponseCodes.success;
-                    res.responseMessage = ResponseMessages.success;
-                }
+                 res= await _repo.getTestTypes();
+               
             }
             catch (Exception ex)
             {
