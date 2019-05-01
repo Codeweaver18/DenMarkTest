@@ -1,0 +1,70 @@
+﻿@using DenMarkTest.web.ViewModel
+@using DenMarkTest.core.Abstract
+@using DenMarkTest.DataAccessLayer.Entities
+@using DenMarkTest.common.Utilities
+@inject ITestService  _service
+
+@{
+    ViewData["Title"] = "AtheleteDetails";
+
+}
+
+<div class="row">
+
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-6">
+        <h4>Change Data for Athelete</h4>
+        <section>
+            <form asp-action="AtheleteDetails" method="post" asp-antiforgery="true">
+                <hr />
+
+                <div class="form-group">
+                    <label class="text-success">Name</label>
+
+                    <select class="form-control" name="participantId">
+                   <option value="" selected></option>
+
+                        @{
+                var users = await _service.ListUsers();
+        foreach (var item in users)
+        {
+                    <option value="@item.id">@item.fname @item.lname</option>
+
+}
+                        }
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="text-success">Distance</label>
+                   <input type="number" class="form-control" name="distance" required/>
+
+                    <input type="hidden" value="@ViewData["TestParticipantsId"]" name="TestParticipantsId" />
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Update record</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+
+
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+
+

@@ -99,6 +99,27 @@ namespace DenMarkTest.core.Services
             return isDelete;
         }
 
+
+        /// <summary>
+        /// Delete single Test Participants by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<bool> deleteTestParticipants(int id)
+        {
+            var isDone = false;
+            try
+            {
+                isDone = await _repo.deleteTestParticipants(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return isDone;
+        }
+
         /// <summary>
         /// Fetches all the Test created on the database
         /// </summary>

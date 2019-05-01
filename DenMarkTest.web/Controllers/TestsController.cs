@@ -47,9 +47,6 @@ namespace DenMarkTest.web.Controllers
             return View();
         }
 
-
-
-
         /// <summary>
         /// Create New Test using supplied Parameters in the viewModel
         /// </summary>
@@ -139,7 +136,7 @@ namespace DenMarkTest.web.Controllers
             {
                 if (id!=0)
                 {
-                    ViewData["AtheleteDetails"] = id.ToString();//setting the retrieved guid to be called from razor page by calling the injected service with @inject
+                    ViewData["TestParticipantsId"] = id.ToString();//setting the retrieved guid to be called from razor page by calling the injected service with @inject
 
                 }
 
@@ -152,6 +149,38 @@ namespace DenMarkTest.web.Controllers
 
             return View();
         }
+
+
+        /// <summary>
+        /// Updates A particular test with possible change of participant user, distance score
+        /// </summary>
+        /// <param name="participantId"></param>
+        /// <param name="TestParticipantsId"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> AtheleteDetails(int participantId, int TestParticipantsId, int distance)
+        {
+            try
+            {
+                var result = await _service.updateTestParticipants(participantId, TestParticipantsId, distance);
+                if (result != null)
+                {
+                    return RedirectToAction("TestDetails", new {guid = result.Test.guid });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
 
 
         /// <summary>
@@ -206,7 +235,13 @@ namespace DenMarkTest.web.Controllers
         }
 
 
-
+        /// <summary>
+        /// Add a specific user to the specified test with the supplied Guid
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="testGuid"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddAtheleteToTest(int userId, string testGuid, int distance)

@@ -120,6 +120,35 @@ namespace DenMarkTest.DataAccessLayer.Repositories
             return isDelete;
         }
 
+
+        /// <summary>
+        /// Delete single test participants entry
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<bool> deleteTestParticipants(int id)
+        {
+            var isDone = false;
+            var tpant = (from x in _dbContext.TestParticipants where x.id==id select x).FirstOrDefault();
+            try
+            {
+                ///detelet
+                _dbContext.TestParticipants.Remove(tpant);
+                var result =await _dbContext.SaveChangesAsync();
+                if (result>0)
+                {
+                    isDone = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return isDone;
+        }
+
         /// <summary>
         /// get all the recorded test in the system if the test count = 0; else it takes the specified number given by count parameter;
         /// </summary>
@@ -181,9 +210,22 @@ namespace DenMarkTest.DataAccessLayer.Repositories
         /// <param name="participantId"></param>
         /// <param name="TestParticipantsId"></param>
         /// <returns></returns>
-        public Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId)
+        public async Task<TestParticipants> getTestParticipant(int TestParticipantsId)
         {
-            throw new NotImplementedException();
+            var participants = new TestParticipants();
+            try
+            {
+                participants = (from x in _dbContext.TestParticipants where x.id == TestParticipantsId select x).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return participants;
+
         }
 
 
