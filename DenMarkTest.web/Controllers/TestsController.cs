@@ -20,9 +20,20 @@ namespace DenMarkTest.web.Controllers
             _logger = logger;
             _service = service;
         }
+
         [HttpGet]
-        public IActionResult CreateTest()
+        public async Task<IActionResult> CreateTest()
         {
+
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured, Test May Not be created");
+
+            }
 
             return View();
         }
@@ -34,7 +45,12 @@ namespace DenMarkTest.web.Controllers
         {
             try
             {
+                //create user here
 
+                if (ModelState.IsValid)
+                {
+                    _service.createTest()
+                }
             }
             catch (Exception ex)
             {
@@ -50,7 +66,7 @@ namespace DenMarkTest.web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult ViewList()
+        public async Task<IActionResult> ViewList()
         {
 
             try

@@ -11,6 +11,7 @@ namespace DenMarkTest.DataAccessLayer.Interfaces
         Task<Test> createTest(Test entity);
         Task<List<Test>> getTest(int count=0);
         Task<List<TestTypes>> getTestTypes();
+        
 
     }
 }

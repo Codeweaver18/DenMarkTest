@@ -1,8 +1,7 @@
-﻿@using DenMarkTest.web.ViewModel;
+﻿@using DenMarkTest.web.ViewModel
+@using DenMarkTest.core.Abstract
 @using DenMarkTest.DataAccessLayer.Entities
-@using DenMarkTest.core.Abstract;
-@inject ITestService _service;
-
+@inject ITestService  _service
 <br/><br/>
 <div class="row">
 
@@ -21,12 +20,22 @@
                 <th>Test type</th>
             </tr>
 
-            @{ 
-                var Test= _service.
-                foreach (var item in collection)
+            @{
+                var Test = await _service.getAllTest();
+                var result = Test.OrderByDescending(x => x.testDate).ToList();
+                foreach (var item in result)
                 {
+                    if (item != null)
+                    {
 
+                <tr>
+                    <td>@item.testDate</td>
+                    <td>@item.TestParticipants.Count()</td>
+                    <td>@item.testType</td>
+                </tr>
+            }
                 }
+
             }
         </table>
     </div>

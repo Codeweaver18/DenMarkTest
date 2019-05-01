@@ -10,5 +10,6 @@ namespace DenMarkTest.DataAccessLayer.Entities
         public DateTime testDate { get; set; }
         public string guid { get; set; } = new Random(383784).ToString();
         public string testDescription { get; set; }
+        public IEnumerable<TestParticipants> TestParticipants { get; set; }
     }
 }
