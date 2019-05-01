@@ -6,7 +6,7 @@ namespace DenMarkTest.core.Abstract
 {
     public static class ResponseCodes
     {
-        public static string success { get; } = "01";
+        public static string success { get; } = "00";
         public static string error { get; } = "01";
     }
 
