@@ -19,10 +19,45 @@ namespace DenMarkTest.DataAccessLayer.Repositories
 
             _dbContext = dbContext;
         }
-
-        public Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance)
+        /// <summary>
+        /// Adding Users/Participants to Existing test in the database;
+        /// </summary>
+        /// <param name="atheleteId"></param>
+        /// <param name="testGuid"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public async Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance)
         {
-            throw new NotImplementedException();
+            var tPants = new TestParticipants();
+            var testByGuid = new Test();
+            var testUser = new User();
+            var isDone = false;
+            try
+            {
+                if (atheleteId!=0 && !string.IsNullOrEmpty(testGuid) && distance!=0)//check for null values
+                {
+                    testByGuid = (from x in _dbContext.Tests where x.guid == testGuid select x).FirstOrDefault();//fetches tests
+                    testUser = (from c in _dbContext.Users where c.id == atheleteId select c).FirstOrDefault();//fetches participants
+                    tPants.Result = distance.ToString();
+                    tPants.Test = testByGuid;
+                    tPants.Participant = testUser;
+                }
+
+               await _dbContext.TestParticipants.AddAsync(tPants);
+                var result = await _dbContext.SaveChangesAsync();
+
+                if (result>0)
+                {
+                    isDone = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return isDone;
         }
 
         /// <summary>
