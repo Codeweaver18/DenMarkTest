@@ -182,6 +182,37 @@ namespace DenMarkTest.web.Controllers
         }
 
 
+        /// <summary>
+        /// Delete A particular Athelete Participant from the test table
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> DeleteParticipant(int id)
+        {
+            var tpant = new TestParticipants();
+            try
+            {
+                     tpant = await _service.getTestParticipant(id);
+                    var result = await _service.deleteTestParticipants(id);
+               
+                   if (tpant.Test==null)
+                {
+                    return RedirectToAction("TestDetails", new { guid =string.Empty});
+                }
+                return RedirectToAction("TestDetails", new { guid = tpant.Test.guid });
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An Error has occured");
+                StatusCode(500, ex.Message);
+            }
+
+            return View();
+        }
+
+
 
         /// <summary>
         /// Delete the Specified Test which guid matches the supplied guid
