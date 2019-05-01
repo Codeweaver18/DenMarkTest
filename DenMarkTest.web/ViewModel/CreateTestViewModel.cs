@@ -16,7 +16,10 @@ namespace DenMarkTest.web.ViewModel
         [DataType(DataType.DateTime)]
         [Display(Name = "Date")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Test Date is required to create a new test")]
-        public DateTime dateCreated { get; set; }
+        public DateTime testDate { get; set; }
+
+
+
 
     }
 }

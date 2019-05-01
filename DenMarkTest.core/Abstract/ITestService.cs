@@ -14,6 +14,13 @@ namespace DenMarkTest.core.Abstract
         Task<List<TestTypes>> getTestTypes();
         Task<List<TestParticipants>> getTestParticipants();
         Task<Test> getTestByGuid(string guid);
+        Task<bool> deleteTest(string guid);
+        Task<List<User>> ListUsers();
+        Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance);
+        Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId);
+        Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance);
+
 
     }
 }
+          

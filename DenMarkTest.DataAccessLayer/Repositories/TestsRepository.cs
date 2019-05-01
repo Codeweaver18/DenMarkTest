@@ -174,6 +174,13 @@ namespace DenMarkTest.DataAccessLayer.Repositories
             return res;
         }
 
+
+        /// <summary>
+        /// Get Athelete Participant of a certain test
+        /// </summary>
+        /// <param name="participantId"></param>
+        /// <param name="TestParticipantsId"></param>
+        /// <returns></returns>
         public Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId)
         {
             throw new NotImplementedException();
@@ -225,9 +232,61 @@ namespace DenMarkTest.DataAccessLayer.Repositories
 
         }
 
-        public Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance)
+        /// <summary>
+        /// List All the Registered user in the system
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<User>> listUsers()
         {
-            throw new NotImplementedException();
+            var usersList = new List<User>();
+
+            try
+            {
+                usersList = (from x in _dbContext.Users select x).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return usersList;
+        }
+
+        /// <summary>
+        /// Update the Participants id and distance of a certain test that matches the TestParticipationId supplied
+        /// </summary>
+        /// <param name="participantId"></param>
+        /// <param name="TestParticipantsId"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public async Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance)
+        {
+            var testPant = new TestParticipants();
+            try
+            {
+               if (participantId!=0 && TestParticipantsId!=0 && distance!=0)
+                {
+                    testPant = (from x in _dbContext.TestParticipants where x.id == TestParticipantsId select x).FirstOrDefault();
+
+                    if (testPant!=null)
+                    {
+                        testPant.Participant.id = participantId;
+                        testPant.Result = distance.ToString();
+                    }
+
+                    _dbContext.TestParticipants.Update(testPant);
+                    var result = await _dbContext.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return testPant;
         }
     }
 }

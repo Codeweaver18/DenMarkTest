@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DenMarkTest.DataAccessLayer.Entities;
+using DenMarkTest.web.ViewModel;
 
 namespace DenMarkTest.web
 {
@@ -14,6 +16,8 @@ namespace DenMarkTest.web
         public MappingProfile()
         {
             AllowNullDestinationValues = true;
+
+            CreateMap<CreateTestViewModel, Test>().ReverseMap();
         }
     }
 }

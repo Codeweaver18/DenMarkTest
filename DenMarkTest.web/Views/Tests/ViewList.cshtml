@@ -11,7 +11,12 @@
 
 
     <div class="col-md-6">
-        <input type="button" value="Creat New Test" name="btnNewTest" class="btn btn-block"/>
+        <a asp-action="CreateTest">
+
+            <input type="button" value="Creat New Test" name="btnNewTest" class="btn btn-block" />
+
+        </a>
+
         <table class="table table-striped">
 
             <tr>
@@ -21,23 +26,23 @@
             </tr>
 
             @{
-                var Test = await _service.getAllTest();
+            var Test = await _service.getAllTest();
 
-                foreach (var item in Test)
+            foreach (var item in Test)
+            {
+                if (item != null)
                 {
-                    if (item != null)
-                    {
 
-                        var count = item.TestParticipants.Count();
-                <tr>
-                    <td>@item.testDate</td>
-                    <td>@count</td>
-                    <td>
-                   <a asp-action="TestDetails" asp-route-guid="@item.guid"> @item.testType</a>
-                    </td>
-                </tr>
+                    var count = item.TestParticipants.Count();
+                    <tr>
+                        <td>@item.testDate</td>
+                        <td>@count</td>
+                        <td>
+                            <a asp-action="TestDetails" asp-route-guid="@item.guid"> @item.testType</a>
+                        </td>
+                    </tr>
             }
-                }
+        }
 
             }
         </table>

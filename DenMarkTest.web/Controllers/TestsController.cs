@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DenMarkTest.core.Abstract;
+using DenMarkTest.DataAccessLayer.Entities;
 using DenMarkTest.web.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,19 +16,26 @@ namespace DenMarkTest.web.Controllers
     {
         private readonly ILogger<TestsController> _logger;
         private readonly ITestService _service;
+        private readonly IMapper _mapper;
 
-        public TestsController(ILogger<TestsController> logger, ITestService service)
+
+        public TestsController(ILogger<TestsController> logger, ITestService service, IMapper mapper)
         {
             _logger = logger;
             _service = service;
+            _mapper = mapper;
         }
-
+        /// <summary>
+        /// Get Html View/Page for CreateTest
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> CreateTest()
         {
 
             try
             {
+                //No Logic for Get Http Views;
                 
             }
             catch (Exception ex)
@@ -39,17 +48,24 @@ namespace DenMarkTest.web.Controllers
         }
 
 
+
+
+        /// <summary>
+        /// Create New Test using supplied Parameters in the viewModel
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTest(CreateTestViewModel model)
         {
             try
             {
-                //create user here
-
                 if (ModelState.IsValid)
                 {
-                    //_service.createTest();
+                    await _service.createTest(model.testType, model.testDate, model.testType);
+                   return RedirectToAction("ViewList");//redirect to  Startpage after creating Test;
                 }
             }
             catch (Exception ex)
@@ -150,8 +166,15 @@ namespace DenMarkTest.web.Controllers
             {
                 if (!string.IsNullOrEmpty(guid))
                 {
-                    ViewData["DeleteTestGuid"] = guid.ToString();//setting the retrieved guid to be called from razor page by calling the injected service with @inject
+                 var res=  await  _service.deleteTest(guid);
 
+                    if (res)
+                    {
+                        _logger.LogInformation(guid + "::Has been deleted successfully");
+
+                        return RedirectToAction("ViewList");
+
+                    }
                 }
 
             }
@@ -186,12 +209,18 @@ namespace DenMarkTest.web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddAtheleteToTest(int )
+        public async Task<IActionResult> AddAtheleteToTest(int userId, string testGuid, int distance)
         {
             try
             {
-                ///No logic
+                var result =await  _service.addParticipantstoTest(userId, testGuid, distance);
 
+                if (result)
+                {
+                    _logger.LogInformation(userId.ToString() + ":: Has been Added to Test with Guid::" + testGuid);
+                }
+
+                return RedirectToAction("TestDetails", new {guid = testGuid});
             }
             catch (Exception ex)
             {

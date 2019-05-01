@@ -20,6 +20,31 @@ namespace DenMarkTest.core.Services
         {
             _repo = repo;
         }
+
+        /// <summary>
+        /// Add a specific Athelete to a specific test
+        /// </summary>
+        /// <param name="atheleteId"></param>
+        /// <param name="testGuid"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public async Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance)
+        {
+            var isDone = false;
+            try
+            {
+                isDone = await _repo.addParticipantstoTest(atheleteId, testGuid, distance);
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return isDone;
+        }
+
         /// <summary>
         /// Create New Test based on the parameters supplied;
         /// </summary>
@@ -50,6 +75,28 @@ namespace DenMarkTest.core.Services
             }
 
             return entity;
+        }
+
+        /// <summary>
+        /// Delete a Test based on matching guid
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public async Task<bool> deleteTest(string guid)
+        {
+            var isDelete = false;
+            try
+            {
+                isDelete = await _repo.deleteTestByGuid(guid);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return isDelete;
         }
 
         /// <summary>
@@ -95,6 +142,11 @@ namespace DenMarkTest.core.Services
             return res;
         }
 
+        public Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Fetches from repo all tests and participants records
         /// </summary>
@@ -134,7 +186,31 @@ namespace DenMarkTest.core.Services
             }
 
             return res;
-        }                    
+        }
 
+        /// <summary>
+        /// Fetches all the application users via the data repository
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<User>> ListUsers()
+        {
+            var res =new List<User>();
+            try
+            {
+                res = await _repo.listUsers();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return res;
+        }
+
+        public Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

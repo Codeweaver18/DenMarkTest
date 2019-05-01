@@ -17,6 +17,7 @@ namespace DenMarkTest.DataAccessLayer.Interfaces
         Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance);
         Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId);
         Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance);
+        Task<List<User>> listUsers();
 
 
     }
