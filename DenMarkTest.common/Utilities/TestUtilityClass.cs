@@ -15,15 +15,29 @@ namespace DenMarkTest.common.Utilities
         /// <returns></returns>
         public string getRating(string value)
         {
-            var res = "Very Good";
+            var val = Convert.ToDouble(value);
+            var res = string.Empty;
             try
             {
+                if (val<=1000)
+                {
+                    res = "Below Average";
+                }
 
-                //switch (switch_on)
-                //{
-                //    default:
-                //}
+                else if (val<=2000 && val>1000)
+                {
+                    res = "Average";
+                }
 
+                else if (val<=3500 && val>2000)
+                {
+                    res = "Good";
+                }
+
+                else if (val>3500)
+                {
+                    res = "Very Good";
+                }
             }
             catch (Exception ex)
             {
