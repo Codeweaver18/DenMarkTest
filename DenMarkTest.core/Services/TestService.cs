@@ -7,6 +7,6 @@ namespace DenMarkTest.core.Services
 {
    public class TestService: ITestService
     {
-
+        public
     }
 }

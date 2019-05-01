@@ -6,6 +6,9 @@ using System.Text;
 
 namespace DenMarkTest.DataAccessLayer.Dbcontexts
 {
+    /// <summary>
+    /// Danish DbContext for creating Dbset Entities and estabishing connection to database server as provided in connection string
+    /// </summary>
     public class DanishContext:DbContext
     {
 
