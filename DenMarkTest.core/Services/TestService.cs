@@ -208,9 +208,28 @@ namespace DenMarkTest.core.Services
             return res;
         }
 
-        public Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance)
+
+        /// <summary>
+        /// update a particular test entry for a registered user which criteria matches supplied params;
+        /// </summary>
+        /// <param name="participantId"></param>
+        /// <param name="TestParticipantsId"></param>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public  async Task<TestParticipants> updateTestParticipants(int participantId, int TestParticipantsId, int distance)
         {
-            throw new NotImplementedException();
+            var tpants =new  TestParticipants();
+            try
+            {
+                tpants = await _repo.updateTestParticipants(participantId, TestParticipantsId, distance);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return tpants;
         }
     }
 }
