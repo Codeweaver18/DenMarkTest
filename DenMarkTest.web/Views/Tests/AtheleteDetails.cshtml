@@ -10,7 +10,9 @@
 }
 
 <div class="row">
-
+    @{
+        var id = (int)ViewData["TestParticipantsId"];
+    }
 
     <div class="col-md-3">
 
@@ -21,12 +23,14 @@
         <section>
             <form asp-action="AtheleteDetails" method="post" asp-antiforgery="true">
                 <hr />
-
+                @{ 
+                    var tpants = await _service.getTestParticipant(id);
+                }
                 <div class="form-group">
                     <label class="text-success">Name</label>
 
                     <select class="form-control" name="participantId">
-                   <option value="" selected></option>
+                   <option value="@tpants.Participant.id" selected>@tpants.Participant.fname @tpants.Participant.lname</option>
 
                         @{
                 var users = await _service.ListUsers();
@@ -42,7 +46,7 @@
 
                 <div class="form-group">
                     <label class="text-success">Distance</label>
-                   <input type="number" class="form-control" name="distance" required/>
+                   <input type="number" class="form-control" name="distance" value="@tpants.Result" required/>
 
                     <input type="hidden" value="@ViewData["TestParticipantsId"]" name="TestParticipantsId" />
                 </div>

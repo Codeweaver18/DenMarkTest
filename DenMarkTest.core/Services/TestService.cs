@@ -163,9 +163,27 @@ namespace DenMarkTest.core.Services
             return res;
         }
 
-        public Task<TestParticipants> getTestParticipant(int participantId, int TestParticipantsId)
+
+        /// <summary>
+        /// Get A single record of Test Participants where id=TestParticipantsId
+        /// </summary>
+        /// <param name="TestParticipantsId"></param>
+        /// <returns></returns>
+        public async Task<TestParticipants> getTestParticipant(int TestParticipantsId)
         {
-            throw new NotImplementedException();
+            var res = new TestParticipants();
+            try
+            {
+                res = await _repo.getTestParticipant(TestParticipantsId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return res;
         }
 
         /// <summary>
