@@ -1,6 +1,6 @@
 using System;
 
-namespace DenMarkTest.web.Models
+namespace DenMarkTest.web.ViewModel
 {
     public class ErrorViewModel
     {

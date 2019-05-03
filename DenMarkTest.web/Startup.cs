@@ -9,6 +9,7 @@ using DenMarkTest.core.Services;
 using DenMarkTest.DataAccessLayer.Dbcontexts;
 using DenMarkTest.DataAccessLayer.Interfaces;
 using DenMarkTest.DataAccessLayer.Repositories;
+using DenMarkTest.web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,9 @@ namespace DenMarkTest.web
             services.AddDbContext<DanishContext>(options =>
              options.UseSqlServer(cxn)
              .UseLazyLoadingProxies());
-             
+
+            services.AddLogging();
+            
             services.AddTransient<ITestsRepository, TestsRepository>();
             services.AddTransient<ITestService, TestService>();//inject services in DI container
             services.AddScoped<TestUtilityClass>();
@@ -51,10 +54,12 @@ namespace DenMarkTest.web
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
 
             app.UseStaticFiles();
 
