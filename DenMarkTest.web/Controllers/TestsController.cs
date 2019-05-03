@@ -6,6 +6,7 @@ using AutoMapper;
 using DenMarkTest.core.Abstract;
 using DenMarkTest.DataAccessLayer.Entities;
 using DenMarkTest.web.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -55,6 +56,7 @@ namespace DenMarkTest.web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles ="Coach")]
         public async Task<IActionResult> CreateTest(CreateTestViewModel model)
         {
             try
@@ -161,6 +163,7 @@ namespace DenMarkTest.web.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
+        [Authorize(Roles = "Coach")]
         public async Task<IActionResult> AtheleteDetails(int participantId, int TestParticipantsId, int distance)
         {
             try
@@ -188,6 +191,7 @@ namespace DenMarkTest.web.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Coach")]
         public async Task<IActionResult> DeleteParticipant(int id)
         {
             var tpant = new TestParticipants();
@@ -220,6 +224,7 @@ namespace DenMarkTest.web.Controllers
         /// <param name="guid"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Coach")]
         public async Task<IActionResult> DeleteTest(string guid = null)
         {
             try
@@ -275,6 +280,7 @@ namespace DenMarkTest.web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Coach")]
         public async Task<IActionResult> AddAtheleteToTest(int userId, string testGuid, int distance)
         {
             try
