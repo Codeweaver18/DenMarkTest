@@ -31,6 +31,7 @@ namespace DenMarkTest.core.Services
         public async Task<bool> addParticipantstoTest(int atheleteId, string testGuid, int distance)
         {
             var isDone = false;
+            var tesvar=null;
             try
             {
                 isDone = await _repo.addParticipantstoTest(atheleteId, testGuid, distance);
