@@ -13,5 +13,11 @@ pipeline {
       }
     }
 
+    stage('deploy to production') {
+      steps {
+        input(message: 'deploy to production?', ok: 'yes deploy')
+      }
+    }
+
   }
 }
