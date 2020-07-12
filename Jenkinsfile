@@ -4,7 +4,6 @@ pipeline {
     stage('Buzz Build') {
       steps {
         echo 'hello world'
-        archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
       }
     }
 
